@@ -17,7 +17,6 @@ import {
   IPipeline,
   StageArtifactSelectorDelegate,
 } from '@spinnaker/core';
-import { csvFormat } from 'd3';
 
 export interface ITaskDefinitionProps {
   command: IEcsServerGroupCommand;
