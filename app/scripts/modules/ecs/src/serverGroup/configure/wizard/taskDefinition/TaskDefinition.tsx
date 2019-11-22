@@ -7,6 +7,7 @@ import {
   IEcsDockerImage,
   IEcsServerGroupCommand,
   IEcsTaskDefinitionArtifact,
+  IEcsTargetGroupMapping,
 } from '../../serverGroupConfiguration.service';
 import {
   ArtifactTypePatterns,
@@ -16,6 +17,7 @@ import {
   IPipeline,
   StageArtifactSelectorDelegate,
 } from '@spinnaker/core';
+import { csvFormat } from 'd3';
 
 export interface ITaskDefinitionProps {
   command: IEcsServerGroupCommand;
@@ -27,25 +29,21 @@ interface ITaskDefinitionState {
   taskDefArtifact: IEcsTaskDefinitionArtifact;
   taskDefArtifactAccount: string;
   containerMappings: IEcsContainerMapping[];
+  targetGroupMappings: IEcsTargetGroupMapping[];
   dockerImages: IEcsDockerImage[];
-  loadBalancedContainer: string;
 }
 
 export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskDefinitionState> {
   constructor(props: ITaskDefinitionProps) {
     super(props);
     const cmd = this.props.command;
-    let defaultContainer = '';
-    if (cmd.containerMappings && cmd.containerMappings.length > 0) {
-      defaultContainer = cmd.containerMappings[0].containerName;
-    }
 
     this.state = {
       taskDefArtifact: cmd.taskDefinitionArtifact,
       containerMappings: cmd.containerMappings ? cmd.containerMappings : [],
       dockerImages: cmd.backingData && cmd.backingData.filtered ? cmd.backingData.filtered.images : [],
-      loadBalancedContainer: cmd.loadBalancedContainer || defaultContainer,
       taskDefArtifactAccount: cmd.taskDefinitionArtifactAccount,
+      targetGroupMappings: cmd.targetGroupMappings ? cmd.targetGroupMappings : [],
     };
   }
 
@@ -109,6 +107,12 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
     this.setState({ containerMappings: conMaps });
   };
 
+  private pushTargetGroupMapping = () => {
+    const targetMaps = this.state.targetGroupMappings;
+    targetMaps.push({ containerName: '', targetGroup: '', targetPort: 0 });
+    this.setState({ targetGroupMappings: targetMaps });
+  };
+
   private updateContainerMappingName = (index: number, newName: string) => {
     const currentMappings = this.state.containerMappings;
     const targetMapping = currentMappings[index];
@@ -131,9 +135,28 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
     this.setState({ containerMappings: currentMappings });
   };
 
-  private updateLoadBalancedContainer = (containerName: string) => {
-    this.props.notifyAngular('loadBalancedContainer', containerName);
-    this.setState({ loadBalancedContainer: containerName });
+  private updateTargetGroupMappingTargetGroup = (index: number, newTargetGroup: string) => {
+    const currentMappings = this.state.targetGroupMappings;
+    const targetMapping = currentMappings[index];
+    targetMapping.targetGroup = newTargetGroup;
+    this.props.notifyAngular('targetGroupMappings', currentMappings);
+    this.setState({ targetGroupMappings: currentMappings });
+  };
+
+  private updateTargetGroupMappingContainer = (index: number, newContainer: string) => {
+    const currentMappings = this.state.targetGroupMappings;
+    const targetMapping = currentMappings[index];
+    targetMapping.containerName = newContainer;
+    this.props.notifyAngular('targetGroupMappings', currentMappings);
+    this.setState({ targetGroupMappings: currentMappings });
+  };
+
+  private updateTargetGroupMappingPort = (index: number, newTargetPort: number) => {
+    const currentMappings = this.state.targetGroupMappings;
+    const targetMapping = currentMappings[index];
+    targetMapping.targetPort = newTargetPort;
+    this.props.notifyAngular('targetGroupMappings', currentMappings);
+    this.setState({ targetGroupMappings: currentMappings });
   };
 
   private removeMapping = (index: number) => {
@@ -157,6 +180,9 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
     const removeMapping = this.removeMapping;
     const updateContainerMappingName = this.updateContainerMappingName;
     const updateContainerMappingImage = this.updateContainerMappingImage;
+    const updateTargetGroupMappingContainer = this.updateTargetGroupMappingContainer;
+    const updateTargetGroupMappingTargetGroup = this.updateTargetGroupMappingTargetGroup;
+    const updateTargetGroupMappingPort = this.updateTargetGroupMappingPort;
 
     const dockerImages = this.state.dockerImages.map(function(image, index) {
       let msg = '';
@@ -206,11 +232,47 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
       );
     });
 
-    const containerOptions = this.state.containerMappings.map(function(mapping, index) {
+    const targetGroupInputs = this.state.targetGroupMappings.map(function(mapping, index) {
       return (
-        <option key={index} value={mapping.containerName}>
-          {mapping.containerName}
-        </option>
+        <tr key={index}>
+          <td>
+            <input
+              className="form-control input-sm"
+              required={true}
+              placeholder="Enter container name..."
+              value={mapping.containerName.toString()}
+              onChange={e => updateTargetGroupMappingContainer(index, e.target.value)}
+            />
+          </td>
+          <td>
+            <select
+              className="form-control input-sm"
+              value={mapping.targetGroup.toString()}
+              required={true}
+              onChange={e => updateTargetGroupMappingTargetGroup(index, e.target.value)}
+            >
+              <option value={''}>Select a target group to use...</option>
+              {dockerImages}
+            </select>
+          </td>
+          <td>
+            <input
+              className="form-control input-sm"
+              required={true}
+              placeholder="Enter target port..."
+              value={mapping.targetPort.toString()}
+              onChange={e => updateTargetGroupMappingPort(index, e.target.valueAsNumber)}
+            />
+          </td>
+          <td>
+            <div className="form-control-static">
+              <a className="btn-link sm-label" onClick={() => removeMapping(index)}>
+                <span className="glyphicon glyphicon-trash" />
+                <span className="sr-only">Remove</span>
+              </a>
+            </div>
+          </td>
+        </tr>
       );
     });
 
@@ -234,23 +296,6 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
               stage={command.viewState.currentStage}
               updatePipeline={this.updatePipeline}
             />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="col-md-3 sm-label-right">
-            <strong>Load balanced container</strong>
-            <HelpField id="ecs.loadBalancedContainer" />
-          </div>
-          <div className="col-md-9">
-            <select
-              className="form-control input-sm"
-              required={command.targetGroup ? true : false}
-              value={this.state.loadBalancedContainer}
-              onChange={e => this.updateLoadBalancedContainer(e.target.value)}
-            >
-              <option value={''}>{'Select a container for load balancer traffic...'}</option>
-              {containerOptions}
-            </select>
           </div>
         </div>
         <div className="form-group">
@@ -280,6 +325,44 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
                     <button className="btn btn-block btn-sm add-new" onClick={this.pushMapping}>
                       <span className="glyphicon glyphicon-plus-sign" />
                       Add New Container Mapping
+                    </button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </form>
+        </div>
+        <div className="form-group">
+          <div className="sm-label-left">
+            <b>Target Group Mappings</b>
+            <HelpField id="ecs.targetGroupMappings" />
+          </div>
+          <form name="ecsTaskDefinitionTargetGroupMappings">
+            <table className="table table-condensed packed tags">
+              <thead>
+                <tr key="header">
+                  <th style={{ width: '30%' }}>
+                    Container name
+                    <HelpField id="ecs.loadBalancedContainer" />
+                  </th>
+                  <th style={{ width: '500%' }}>
+                    Target group
+                    <HelpField id="ecs.containerMappingImage" />
+                  </th>
+                  <th style={{ width: '20%' }}>
+                    Target port
+                    <HelpField id="ecs.loadbalancing.port" />
+                  </th>
+                  <th />
+                </tr>
+              </thead>
+              <tbody>{targetGroupInputs}</tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={4}>
+                    <button className="btn btn-block btn-sm add-new" onClick={this.pushTargetGroupMapping}>
+                      <span className="glyphicon glyphicon-plus-sign" />
+                      Add New Target Group Mapping
                     </button>
                   </td>
                 </tr>

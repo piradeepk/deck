@@ -102,10 +102,15 @@ export interface IEcsContainerMapping {
   imageDescription: IEcsDockerImage;
 }
 
+export interface IEcsTargetGroupMapping {
+  containerName: string;
+  targetGroup: string;
+  targetPort: number;
+}
+
 export interface IEcsServerGroupCommand extends IServerGroupCommand {
   backingData: IEcsServerGroupCommandBackingData;
   targetHealthyDeployPercentage: number;
-  targetGroup: string;
   placementStrategyName: string;
   placementStrategySequence: IPlacementStrategy[];
   imageDescription: IEcsDockerImage;
@@ -113,7 +118,7 @@ export interface IEcsServerGroupCommand extends IServerGroupCommand {
   taskDefinitionArtifact: IEcsTaskDefinitionArtifact;
   taskDefinitionArtifactAccount: string;
   containerMappings: IEcsContainerMapping[];
-  loadBalancedContainer: string;
+  targetGroupMappings: IEcsTargetGroupMapping[];
 
   subnetTypeChanged: (command: IEcsServerGroupCommand) => IServerGroupCommandResult;
   placementStrategyNameChanged: (command: IEcsServerGroupCommand) => IServerGroupCommandResult;
