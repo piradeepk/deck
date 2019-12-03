@@ -16,6 +16,7 @@ import './ecs.help';
 import { COMMON_MODULE } from './common/common.module';
 import { ECS_SERVERGROUP_MODULE } from './serverGroup/serverGroup.module';
 import { ECS_SERVER_GROUP_LOGGING } from './serverGroup/configure/wizard/logging/logging.component';
+import { CONTAINER_REACT } from './serverGroup/configure/wizard/container/Container';
 import { TASK_DEFINITION_REACT } from './serverGroup/configure/wizard/taskDefinition/TaskDefinition';
 import { ECS_SECURITY_GROUP_MODULE } from './securityGroup/securityGroup.module';
 
@@ -38,8 +39,8 @@ angular
     ECS_SERVER_GROUP_TRANSFORMER,
     // require('./pipeline/stages/cloneServerGroup/ecsCloneServerGroupStage').name,  // TODO(Bruno Carrier): We should enable this on Clouddriver before revealing this stage
     require('./serverGroup/configure/wizard/advancedSettings/advancedSettings.component').name,
-    require('./serverGroup/configure/wizard/container/container.component').name,
     require('./serverGroup/configure/wizard/horizontalScaling/horizontalScaling.component').name,
+    CONTAINER_REACT,
     TASK_DEFINITION_REACT,
     ECS_SERVER_GROUP_LOGGING,
     ECS_NETWORKING_SECTION,

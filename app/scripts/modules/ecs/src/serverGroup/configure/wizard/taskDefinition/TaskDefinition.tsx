@@ -162,9 +162,6 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
   };
 
   private updateTargetGroupMappingTargetGroup = (index: number, newTargetGroup: string) => {
-    // tslint:disable-next-line:no-console
-    console.log('update tg');
-
     const currentMappings = this.state.targetGroupMappings;
     const targetMapping = currentMappings[index];
     targetMapping.targetGroup = newTargetGroup;
@@ -173,9 +170,6 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
   };
 
   private updateTargetGroupMappingContainer = (index: number, targetContainer: string) => {
-    // tslint:disable-next-line:no-console
-    console.log('update container');
-
     const currentMappings = this.state.targetGroupMappings;
     const targetMapping = currentMappings[index];
     targetMapping.containerName = targetContainer;
@@ -184,9 +178,6 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
   };
 
   private updateTargetGroupMappingPort = (index: number, targetPort: number) => {
-    // tslint:disable-next-line:no-console
-    console.log('update port');
-
     const currentMappings = this.state.targetGroupMappings;
     const targetMapping = currentMappings[index];
     targetMapping.containerPort = targetPort;
@@ -406,11 +397,11 @@ export class TaskDefinition extends React.Component<ITaskDefinitionProps, ITaskD
                   </th>
                   <th style={{ width: '55%' }}>
                     Target group
-                    <HelpField id="ecs.containerMappingImage" />
+                    <HelpField id="ecs.loadBalancer.targetGroup" />
                   </th>
                   <th style={{ width: '15%' }}>
                     Target port
-                    <HelpField id="ecs.loadbalancing.port" />
+                    <HelpField id="ecs.loadbalancing.targetPort" />
                   </th>
                   <th />
                 </tr>

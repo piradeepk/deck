@@ -110,6 +110,8 @@ export interface IEcsTargetGroupMapping {
 
 export interface IEcsServerGroupCommand extends IServerGroupCommand {
   backingData: IEcsServerGroupCommandBackingData;
+  computeUnits: number;
+  reservedMemory: number;
   targetHealthyDeployPercentage: number;
   targetGroup: string;
   containerPort: number;

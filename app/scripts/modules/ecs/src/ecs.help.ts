@@ -61,7 +61,7 @@ const helpContents: { [key: string]: string } = {
     '<p>The name of the container. Name should match the <a href="https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-name"><b>containerDefinition.name</b></a> field as it appears in the Task Definition.</p>',
   'ecs.containerMappingImage': '<p>The container image the named container should run.</p>',
   'ecs.targetGroupMappings':
-    '<p>The list of expected containers within the Task Definition and which container image they should use. Containers in the Task Definition which are not specified here will be registered as they appear in the artifact.</p>',
+    '<p>The list of expected target groups within the Task Definition and which port they should map to within the specified container.</p>',
   'ecs.loadBalancedContainer':
     '<p>The container in the Task Definition that should receive traffic from the load balancer. Required if a load balancer target group has been specified.</p>',
   'ecs.tags': '<p>The tags to apply to the task definition and the service',
