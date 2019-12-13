@@ -23,6 +23,7 @@ import { ECS_SECURITY_GROUP_MODULE } from './securityGroup/securityGroup.module'
 import './logo/ecs.logo.less';
 import { ECS_SERVERGROUP_CONFIGURE_WIZARD_CLONESERVERGROUP_ECS_CONTROLLER } from './serverGroup/configure/wizard/CloneServerGroup.ecs.controller';
 import { ECS_SERVERGROUP_CONFIGURE_WIZARD_ADVANCEDSETTINGS_ADVANCEDSETTINGS_COMPONENT } from './serverGroup/configure/wizard/advancedSettings/advancedSettings.component';
+import { ECS_SERVERGROUP_CONFIGURE_WIZARD_CONTAINER_CONTAINER_COMPONENT } from './serverGroup/configure/wizard/container/container.component';
 import { ECS_SERVERGROUP_CONFIGURE_WIZARD_HORIZONTALSCALING_HORIZONTALSCALING_COMPONENT } from './serverGroup/configure/wizard/horizontalScaling/horizontalScaling.component';
 import { ECS_SERVERGROUP_CONFIGURE_WIZARD_SERVICEDISCOVERY_SERVICEDISCOVERY_COMPONENT } from './serverGroup/configure/wizard/serviceDiscovery/serviceDiscovery.component';
 import { ECS_SERVERGROUP_CONFIGURE_WIZARD_LOCATION_SERVERGROUPBASICSETTINGS_CONTROLLER } from './serverGroup/configure/wizard/location/ServerGroupBasicSettings.controller';
