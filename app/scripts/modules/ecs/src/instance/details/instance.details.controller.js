@@ -252,7 +252,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         };
 
         ConfirmationModalService.confirm({
-          header: 'Really terminate ' + instance.instanceId + '?',
+          header: 'Really terminate ' + instance + '?',
           buttonText: 'Terminate ' + instance.instanceId,
           account: instance.account,
           taskMonitorConfig: taskMonitor,
