@@ -241,7 +241,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
           application: app,
           title: 'Terminating ' + instance.id,
           onTaskComplete: function() {
-            if ($state.includes('**.instanceDetails', { instanceId: instance.instanceId })) {
+            if ($state.includes('**.instanceDetails', { instanceId: instance.id })) {
               $state.go('^');
             }
           },
