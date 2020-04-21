@@ -88,7 +88,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         } else {
           app.serverGroups.data.some(function(serverGroup) {
             return serverGroup.instances.some(function(possibleInstance) {
-              if (possibleInstance.id === instance.id) {
+              if (possibleInstance.id === instance.instanceId) {
                 instanceSummary = possibleInstance;
                 loadBalancers = serverGroup.loadBalancers;
                 targetGroup = serverGroup.targetGroup;
@@ -106,7 +106,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
             app.loadBalancers.data.some(function(loadBalancer) {
               return (
                 loadBalancer.instances.some(function(possibleInstance) {
-                  if (possibleInstance.id === instance.id) {
+                  if (possibleInstance.id === instance.instanceId) {
                     instanceSummary = possibleInstance;
                     loadBalancers = [loadBalancer.name];
                     account = loadBalancer.account;
@@ -117,7 +117,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
                 }) ||
                 loadBalancer.targetGroup.some(function(targetGroup) {
                   return targetGroup.instances.some(function(possibleInstance) {
-                    if (possibleInstance.id === instance.id) {
+                    if (possibleInstance.id === instance.instanceId) {
                       instanceSummary = possibleInstance;
                       targetGroup = targetGroup.name;
                       account = loadBalancer.account;
@@ -138,7 +138,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
                       return false;
                     }
                     return serverGroup.instances.some(function(possibleInstance) {
-                      if (possibleInstance.id === instance.id) {
+                      if (possibleInstance.id === instance.instanceId) {
                         instanceSummary = possibleInstance;
                         loadBalancers = [loadBalancer.name];
                         account = loadBalancer.account;
@@ -154,7 +154,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
                         return false;
                       }
                       return serverGroup.instances.some(function(possibleInstance) {
-                        if (possibleInstance.id === instance.id) {
+                        if (possibleInstance.id === instance.instanceId) {
                           instanceSummary = possibleInstance;
                           loadBalancers = [loadBalancer.name];
                           account = loadBalancer.account;
@@ -176,7 +176,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
           extraData.account = account;
           extraData.region = region;
           RecentHistoryService.addExtraDataToLatest('instances', extraData);
-          return InstanceReader.getInstanceDetails(account, region, instance.id).then(details => {
+          return InstanceReader.getInstanceDetails(account, region, instance.instanceId).then(details => {
             if ($scope.$$destroyed) {
               return;
             }
@@ -204,7 +204,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         }
 
         if (!instanceSummary) {
-          $scope.instanceIdNotFound = instance.id;
+          $scope.instanceIdNotFound = instance.instanceId;
           $scope.state.loading = false;
         }
 
@@ -217,7 +217,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         }
         if (app.isStandalone) {
           $scope.state.loading = false;
-          $scope.instanceIdNotFound = instance.id;
+          $scope.instanceIdNotFound = instance.instanceId;
           $scope.state.notFoundStandalone = true;
           RecentHistoryService.removeLastItem('instances');
         } else {
@@ -241,7 +241,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
           application: app,
           title: 'Terminating ' + instance.id,
           onTaskComplete: function() {
-            if ($state.includes('**.instanceDetails', { instanceId: instance.id })) {
+            if ($state.includes('**.instanceDetails', { instanceId: instance.instanceId })) {
               $state.go('^');
             }
           },
@@ -296,7 +296,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
 
         const taskMonitor = {
           application: app,
-          title: 'Enabling ' + instance.id + ' in discovery',
+          title: 'Enabling ' + instance.instanceId + ' in discovery',
         };
 
         const submitMethod = function() {
@@ -304,8 +304,8 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         };
 
         ConfirmationModalService.confirm({
-          header: 'Really enable ' + instance.id + ' in discovery?',
-          buttonText: 'Enable ' + instance.id,
+          header: 'Really enable ' + instance.instanceId + ' in discovery?',
+          buttonText: 'Enable ' + instance.instanceId,
           account: instance.account,
           taskMonitorConfig: taskMonitor,
           submitMethod: submitMethod,
@@ -317,7 +317,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
 
         const taskMonitor = {
           application: app,
-          title: 'Disabling ' + instance.id + ' in discovery',
+          title: 'Disabling ' + instance.instanceId + ' in discovery',
         };
 
         const submitMethod = function() {
@@ -325,8 +325,8 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         };
 
         ConfirmationModalService.confirm({
-          header: 'Really disable ' + instance.id + ' in discovery?',
-          buttonText: 'Disable ' + instance.id,
+          header: 'Really disable ' + instance.instanceId + ' in discovery?',
+          buttonText: 'Disable ' + instance.instanceId,
           account: instance.account,
           taskMonitorConfig: taskMonitor,
           submitMethod: submitMethod,
