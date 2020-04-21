@@ -251,7 +251,9 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
           return instanceWriter.terminateInstance(instance, app, defaultRequestParams);
         };
 
+        // eslint-disable-next-line no-console
         console.log('Instance: ');
+        // eslint-disable-next-line no-console
         console.log(instance);
 
         ConfirmationModalService.confirm({
