@@ -239,7 +239,7 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
 
         const taskMonitor = {
           application: app,
-          title: 'Terminating ' + instance.instanceId,
+          title: 'Terminating ' + instance.id,
           onTaskComplete: function() {
             if ($state.includes('**.instanceDetails', { instanceId: instance.instanceId })) {
               $state.go('^');
@@ -257,8 +257,8 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         console.log(instance);
 
         ConfirmationModalService.confirm({
-          header: 'Really terminate ' + instance.account + '?',
-          buttonText: 'Terminate ' + instance.instanceId,
+          header: 'Really terminate ' + instance.id + '?',
+          buttonText: 'Terminate ' + instance.id,
           account: instance.account,
           taskMonitorConfig: taskMonitor,
           submitMethod: submitMethod,
