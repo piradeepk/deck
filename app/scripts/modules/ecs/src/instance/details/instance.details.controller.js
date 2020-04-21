@@ -236,7 +236,6 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
 
       this.terminateInstance = function terminateInstance() {
         const instance = $scope.instance;
-        console.log(instance);
 
         const taskMonitor = {
           application: app,
@@ -251,6 +250,9 @@ module(ECS_INSTANCE_DETAILS_INSTANCE_DETAILS_CONTROLLER, [UIROUTER_ANGULARJS, AN
         const submitMethod = function() {
           return instanceWriter.terminateInstance(instance, app, defaultRequestParams);
         };
+
+        console.log('Instance: ');
+        console.log(instance);
 
         ConfirmationModalService.confirm({
           header: 'Really terminate ' + instance.account + '?',
