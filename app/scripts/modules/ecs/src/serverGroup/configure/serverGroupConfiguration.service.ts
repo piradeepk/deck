@@ -92,6 +92,10 @@ export interface IEcsServerGroupCommandBackingData extends IServerGroupCommandBa
   images: IEcsDockerImage[];
 }
 
+export interface IEcsLoggingOptions {
+  key:
+}
+
 export interface IEcsTaskDefinitionArtifact {
   artifact?: IArtifact;
   artifactId?: string;
@@ -128,6 +132,8 @@ export interface IEcsServerGroupCommand extends IServerGroupCommand {
   taskDefinitionArtifactAccount: string;
   containerMappings: IEcsContainerMapping[];
   loadBalancedContainer: string;
+  logDriver: string;
+  logOptions: { [key: string]: string };
   targetGroupMappings: IEcsTargetGroupMapping[];
   serviceDiscoveryAssociations: IEcsServiceDiscoveryRegistryAssociation[];
 
