@@ -13,7 +13,7 @@ class ViewEventsLinkCtrl implements IController {
       templateUrl: require('./events.html'),
       controller: EventsController,
       controllerAs: '$ctrl',
-      windowClass: 'layer-critical',
+      windowClass: 'layout-critical',
       resolve: {
         serverGroup: () => this.serverGroup,
       },
