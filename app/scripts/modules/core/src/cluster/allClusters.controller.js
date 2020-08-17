@@ -123,7 +123,7 @@ module(CORE_CLUSTER_ALLCLUSTERS_CONTROLLER, [
               $uibModal.open({
                 templateUrl: providerConfig.cloneServerGroupTemplateUrl,
                 controller: `${providerConfig.cloneServerGroupController} as ctrl`,
-                windowClass: 'modal-z-index-fix',
+                windowClass: 'layer-critical',
                 size: 'lg',
                 resolve: {
                   title: () => title,
