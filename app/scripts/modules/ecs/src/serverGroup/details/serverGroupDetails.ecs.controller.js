@@ -292,7 +292,7 @@ angular
             'ecs.rollback.modal',
             require('./rollback/rollbackServerGroup.html'),
           ),
-          windowClass: 'layout-critical',
+          windowClass: 'layer-critical',
           controller: 'ecsRollbackServerGroupCtrl as ctrl',
           resolve: {
             serverGroup: () => this.serverGroup,
@@ -319,7 +319,7 @@ angular
         $uibModal.open({
           templateUrl: overrideRegistry.getTemplate('ecs.resize.modal', require('./resize/resizeServerGroup.html')),
           controller: 'ecsResizeServerGroupCtrl as ctrl',
-          windowClass: 'layout-critical',
+          windowClass: 'layer-critical',
           resolve: {
             serverGroup: () => this.serverGroup,
             application: () => app,
@@ -332,7 +332,7 @@ angular
           templateUrl: require('../configure/wizard/serverGroupWizard.html'),
           controller: 'ecsCloneServerGroupCtrl as ctrl',
           size: 'lg',
-          windowClass: 'layout-critical',
+          windowClass: 'layer-critical',
           resolve: {
             title: () => 'Clone ' + serverGroup.name,
             application: () => app,
