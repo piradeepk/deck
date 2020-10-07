@@ -3,11 +3,11 @@
     <div class="col-md-5 sm-label-right">
       <b>Log driver (Optional)</b> <help-field key="ecs.logDriver"></help-field>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7" data-purpose="ServerGroupWizard.topLogDriver">
       <ui-select
         ng-model="$ctrl.command.logDriver"
         class="form-control input-sm"
-        data-testId="ServerGroupWizard.logDriver"
+        data-purpose="ServerGroupWizard.logDriver"
       >
         <ui-select-match>{{ $select.selected }}</ui-select-match>
         <ui-select-choices
