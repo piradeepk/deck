@@ -221,12 +221,12 @@ describe('amazon ecs: ECSApp Server Group', () => {
       .eq(0)
       .click();
 
-    cy.get('container-react input[type=number]')
+    cy.get('[data-test-id="ContainerInputs.computeUnits"]')
       .eq(0)
       .clear()
       .type(1024);
 
-    cy.get('container-react input[type=number]')
+    cy.get('[data-test-id="ContainerInputs.reservedMemory"]')
       .eq(1)
       .clear()
       .type(1024);
@@ -241,13 +241,9 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('container-react input[type=number]')
-      .eq(0)
-      .should('have.value', '1024');
+    cy.get('[data-test-id="ContainerInputs.computeUnits"]').should('have.value', '1024');
 
-    cy.get('container-react input[type=number]')
-      .eq(1)
-      .should('have.value', '1024');
+    cy.get('[data-test-id="ContainerInputs.reservedMemory"]').should('have.value', '1024');
 
     cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
