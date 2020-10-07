@@ -63,9 +63,8 @@ export class Container extends React.Component<IContainerProps, IContainerState>
     };
 
     this.state.targetGroupMappings.forEach(targetGroupMapping => {
-      targetGroupMapping.containerName = "";
+      targetGroupMapping.containerName = '';
     });
-
   }
 
   public componentDidMount() {
@@ -187,7 +186,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
     const targetGroupInputs = this.state.targetGroupMappings.map(function(mapping, index) {
       return (
         <tr key={index}>
-          <td>
+          <td data-test-id="ContainerInput.targetGroup">
             <TetheredSelect
               placeholder="Select a target group to use..."
               options={targetGroupsAvailable}
@@ -196,7 +195,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
               clearable={false}
             />
           </td>
-          <td>
+          <td data-test-id="ContainerInput.targetGroupPort">
             <input
               type="number"
               className="form-control input-sm no-spel"
