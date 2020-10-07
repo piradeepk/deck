@@ -25,214 +25,214 @@ describe('amazon ecs: ECSApp Server Group', () => {
     );
   });
 
-  it('configure a new server group with artifacts', () => {
-    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
+  // it('configure a new server group with artifacts', () => {
+  //   cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
-    cy.get('a:contains("Configure")').click({ force: true });
+  //   cy.get('a:contains("Configure")').click({ force: true });
 
-    cy.get('a:contains("Deploy")').click({ force: true });
+  //   cy.get('a:contains("Deploy")').click({ force: true });
 
-    cy.get('.btn:contains("Add server group")').click();
+  //   cy.get('.btn:contains("Add server group")').click();
 
-    cy.get('span:contains("Continue")').click();
+  //   cy.get('span:contains("Continue")').click();
 
-    cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
+  //   cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
 
-    cy.get('span:contains("spinnaker-deployment-cluster")').click();
+  //   cy.get('span:contains("spinnaker-deployment-cluster")').click();
 
-    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
+  //   cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
+  //   cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
-    cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
+  //   cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
 
-    cy.get('span:contains("awsvpc")').click();
+  //   cy.get('span:contains("awsvpc")').click();
 
-    cy.get('div[ng-model="$ctrl.command.subnetType"]').type('public');
+  //   cy.get('div[ng-model="$ctrl.command.subnetType"]').type('public');
 
-    cy.get('span:contains("public-subnet")').click();
+  //   cy.get('span:contains("public-subnet")').click();
 
-    cy.get('input[ng-model="$ctrl.command.associatePublicIpAddress"]')
-      .eq(1)
-      .click();
+  //   cy.get('input[ng-model="$ctrl.command.associatePublicIpAddress"]')
+  //     .eq(1)
+  //     .click();
 
-    cy.get('input[ng-model="command.useTaskDefinitionArtifact"]')
-      .eq(1)
-      .click();
+  //   cy.get('input[ng-model="command.useTaskDefinitionArtifact"]')
+  //     .eq(1)
+  //     .click();
 
-    cy.get('task-definition-react .Select-placeholder:contains("Select an artifact")').type(' ');
+  //   cy.get('task-definition-react .Select-placeholder:contains("Select an artifact")').type(' ');
 
-    cy.get('task-definition-react .Select-option:contains("Define")').click();
+  //   cy.get('task-definition-react .Select-option:contains("Define")').click();
 
-    cy.get('task-definition-react input')
-      .eq(3)
-      .type('new-ecs-artifact');
-    cy.get('task-definition-react input')
-      .eq(4)
-      .type('0.0.1');
-    cy.get('task-definition-react input')
-      .eq(5)
-      .type('someLocation');
-    cy.get('task-definition-react input')
-      .eq(6)
-      .type('someReference');
+  //   cy.get('task-definition-react input')
+  //     .eq(3)
+  //     .type('new-ecs-artifact');
+  //   cy.get('task-definition-react input')
+  //     .eq(4)
+  //     .type('0.0.1');
+  //   cy.get('task-definition-react input')
+  //     .eq(5)
+  //     .type('someLocation');
+  //   cy.get('task-definition-react input')
+  //     .eq(6)
+  //     .type('someReference');
 
-    cy.get('task-definition-react button:contains("Add New Container Mapping")').click({ force: true });
+  //   cy.get('task-definition-react button:contains("Add New Container Mapping")').click({ force: true });
 
-    cy.get('task-definition-react input[placeholder="enter container name..."]').type('v001-container');
+  //   cy.get('task-definition-react input[placeholder="enter container name..."]').type('v001-container');
 
-    cy.get('task-definition-react .Select-placeholder:contains("Select an image")').type('TRIGGER');
+  //   cy.get('task-definition-react .Select-placeholder:contains("Select an image")').type('TRIGGER');
 
-    cy.get('.Select-option:contains("TRIGGER")').click();
+  //   cy.get('.Select-option:contains("TRIGGER")').click();
 
-    cy.get('task-definition-react button:contains("Add New Target Group Mapping")').click({ force: true });
+  //   cy.get('task-definition-react button:contains("Add New Target Group Mapping")').click({ force: true });
 
-    cy.get('task-definition-react input[placeholder="Enter a container name ..."]').type('v001-container');
+  //   cy.get('task-definition-react input[placeholder="Enter a container name ..."]').type('v001-container');
 
-    cy.get('task-definition-react .Select-placeholder:contains("Select a target group")').type('demo');
+  //   cy.get('task-definition-react .Select-placeholder:contains("Select a target group")').type('demo');
 
-    cy.get('.Select-option:contains("demo")').click();
+  //   cy.get('.Select-option:contains("demo")').click();
 
-    cy.get('div[ng-model="$ctrl.command.launchType"]').type('FARGATE');
+  //   cy.get('div[ng-model="$ctrl.command.launchType"]').type('FARGATE');
 
-    cy.get('.ui-select-highlight:contains("FARGATE")').click();
+  //   cy.get('.ui-select-highlight:contains("FARGATE")').click();
 
-    cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
+  //   cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
-    cy.get('.account-tag').should('have.length', 2);
+  //   cy.get('.account-tag').should('have.length', 2);
 
-    cy.get('td:contains("ecsapp-prod-ecsdemo")').should('have.length', 1);
-    cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-prod-ecsdemo")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
 
-    cy.get('td:contains("us-west-2")').should('have.length', 2);
+  //   cy.get('td:contains("us-west-2")').should('have.length', 2);
 
-    cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
-  });
+  //   cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
+  // });
 
-  it('configure a new server group with container inputs', () => {
-    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
+  // it('configure a new server group with container inputs', () => {
+  //   cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
-    cy.get('a:contains("Configure")').click({ force: true });
+  //   cy.get('a:contains("Configure")').click({ force: true });
 
-    cy.get('a:contains("Deploy")').click({ force: true });
+  //   cy.get('a:contains("Deploy")').click({ force: true });
 
-    cy.get('.btn:contains("Add server group")').click();
+  //   cy.get('.btn:contains("Add server group")').click();
 
-    cy.get('span:contains("Continue")').click();
+  //   cy.get('span:contains("Continue")').click();
 
-    cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
+  //   cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
 
-    cy.get('span:contains("spinnaker-deployment-cluster")').click();
+  //   cy.get('span:contains("spinnaker-deployment-cluster")').click();
 
-    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
+  //   cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
+  //   cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
-    cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
+  //   cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
 
-    cy.get('span:contains("awsvpc")').click();
+  //   cy.get('span:contains("awsvpc")').click();
 
-    cy.get('div[ng-model="$ctrl.command.subnetType"]').type('public');
+  //   cy.get('div[ng-model="$ctrl.command.subnetType"]').type('public');
 
-    cy.get('span:contains("public-subnet")').click();
+  //   cy.get('span:contains("public-subnet")').click();
 
-    cy.get('input[ng-model="$ctrl.command.associatePublicIpAddress"]')
-      .eq(1)
-      .click();
+  //   cy.get('input[ng-model="$ctrl.command.associatePublicIpAddress"]')
+  //     .eq(1)
+  //     .click();
 
-    cy.get('.Select-placeholder:contains("Select an image")').type('TRIGGER');
+  //   cy.get('.Select-placeholder:contains("Select an image")').type('TRIGGER');
 
-    cy.get('.Select-option:contains("TRIGGER")').click();
+  //   cy.get('.Select-option:contains("TRIGGER")').click();
 
-    cy.get('[data-testid="ContainerInput.computeUnits"]').type(1024);
+  //   cy.get('[data-testid="ContainerInput.computeUnits"]').type(1024);
 
-    cy.get('[data-testid="ContainerInput.reservedMemory"]').type(1024);
+  //   cy.get('[data-testid="ContainerInput.reservedMemory"]').type(1024);
 
-    cy.get('div[ng-model="$ctrl.command.launchType"]').type('FARGATE');
+  //   cy.get('div[ng-model="$ctrl.command.launchType"]').type('FARGATE');
 
-    cy.get('.ui-select-highlight:contains("FARGATE")').click();
+  //   cy.get('.ui-select-highlight:contains("FARGATE")').click();
 
-    cy.get('[data-testId="ServerGroupWizard.logDriver"]').type('awslogs');
+  //   cy.get('[data-testId="ServerGroupWizard.logDriver"]').type('awslogs');
 
-    cy.get('span:contains("awslogs")').click();
+  //   cy.get('span:contains("awslogs")').click();
 
-    cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
+  //   cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
-    cy.get('.account-tag').should('have.length', 2);
+  //   cy.get('.account-tag').should('have.length', 2);
 
-    cy.get('td:contains("ecsapp-prod-ecsdemo")').should('have.length', 1);
-    cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-prod-ecsdemo")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
 
-    cy.get('td:contains("us-west-2")').should('have.length', 2);
+  //   cy.get('td:contains("us-west-2")').should('have.length', 2);
 
-    cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
-  });
+  //   cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
+  // });
 
-  it('edit an existing server group with artifact', () => {
-    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
+  // it('edit an existing server group with artifact', () => {
+  //   cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
-    cy.get('a:contains("Configure")').click({ force: true });
+  //   cy.get('a:contains("Configure")').click({ force: true });
 
-    cy.get('a:contains("Deploy")').click({ force: true });
+  //   cy.get('a:contains("Deploy")').click({ force: true });
 
-    cy.get('.glyphicon-edit').click({ force: true });
+  //   cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
+  //   cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
+  //   cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
-    cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
+  //   cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
-    cy.get('.account-tag').should('have.length', 1);
+  //   cy.get('.account-tag').should('have.length', 1);
 
-    cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
 
-    cy.get('td:contains("us-west-2")').should('have.length', 1);
+  //   cy.get('td:contains("us-west-2")').should('have.length', 1);
 
-    cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
-  });
+  //   cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
+  // });
 
-  it('edit an existing server group with container inputs', () => {
-    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
+  // it('edit an existing server group with container inputs', () => {
+  //   cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
-    cy.get('a:contains("Configure")').click({ force: true });
+  //   cy.get('a:contains("Configure")').click({ force: true });
 
-    cy.get('a:contains("Deploy")').click({ force: true });
+  //   cy.get('a:contains("Deploy")').click({ force: true });
 
-    cy.get('.glyphicon-edit').click({ force: true });
+  //   cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
+  //   cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
+  //   cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
-    cy.get('input[ng-model="command.useTaskDefinitionArtifact"]')
-      .eq(0)
-      .click();
+  //   cy.get('input[ng-model="command.useTaskDefinitionArtifact"]')
+  //     .eq(0)
+  //     .click();
 
-    cy.get('[data-testid="ContainerInput.computeUnits"]')
-      .clear()
-      .type(1024);
+  //   cy.get('[data-testid="ContainerInput.computeUnits"]')
+  //     .clear()
+  //     .type(1024);
 
-    cy.get('[data-testid="ContainerInput.reservedMemory"]')
-      .clear()
-      .type(1024);
+  //   cy.get('[data-testid="ContainerInput.reservedMemory"]')
+  //     .clear()
+  //     .type(1024);
 
-    cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
+  //   cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
-    cy.get('.account-tag').should('have.length', 1);
+  //   cy.get('.account-tag').should('have.length', 1);
 
-    cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
+  //   cy.get('td:contains("ecsapp-functional-testing")').should('have.length', 1);
 
-    cy.get('td:contains("us-west-2")').should('have.length', 1);
+  //   cy.get('td:contains("us-west-2")').should('have.length', 1);
 
-    cy.get('.glyphicon-edit').click({ force: true });
+  //   cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('[data-testid="ContainerInputs.computeUnits"]').should('have.value', '1024');
+  //   cy.get('[data-testid="ContainerInputs.computeUnits"]').should('have.value', '1024');
 
-    cy.get('[data-testid="ContainerInputs.reservedMemory"]').should('have.value', '1024');
+  //   cy.get('[data-testid="ContainerInputs.reservedMemory"]').should('have.value', '1024');
 
-    cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
+  //   cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
-    cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
-  });
+  //   cy.get('button[ng-click="pipelineConfigurerCtrl.revertPipelineChanges()"]').click();
+  // });
 });
