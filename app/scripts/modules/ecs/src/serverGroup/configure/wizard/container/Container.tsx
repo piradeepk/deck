@@ -243,7 +243,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
             <b>Compute Units</b>
             <HelpField id="ecs.capacity.reserved.computeUnits" />
           </div>
-          <div className="col-md-9" style={{ width: '100px' }}>
+          <div className="col-md-9" style={{ width: '100px' }} data-testid="ContainerInputs.computeUnits">
             <input
               data-testid="ContainerInput.computeUnits"
               type="number"

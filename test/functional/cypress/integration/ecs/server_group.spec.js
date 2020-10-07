@@ -26,7 +26,7 @@ describe('amazon ecs: ECSApp Server Group', () => {
   });
 
   it('configure a new server group with artifacts', () => {
-    cy.visit('#/applications/ecsapp/executions');
+    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
     cy.get('a:contains("Configure")').click({ force: true });
 
@@ -110,7 +110,7 @@ describe('amazon ecs: ECSApp Server Group', () => {
   });
 
   it('configure a new server group with container inputs', () => {
-    cy.visit('#/applications/ecsapp/executions');
+    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
     cy.get('a:contains("Configure")').click({ force: true });
 
@@ -173,7 +173,7 @@ describe('amazon ecs: ECSApp Server Group', () => {
   });
 
   it('edit an existing server group with artifact', () => {
-    cy.visit('#/applications/ecsapp/executions');
+    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
     cy.get('a:contains("Configure")').click({ force: true });
 
@@ -201,7 +201,7 @@ describe('amazon ecs: ECSApp Server Group', () => {
   });
 
   it('edit an existing server group with container inputs', () => {
-    cy.visit('#/applications/ecsapp/executions');
+    cy.visit('http://localhost:9000/#/applications/ecsapp/executions');
 
     cy.get('a:contains("Configure")').click({ force: true });
 
@@ -221,11 +221,11 @@ describe('amazon ecs: ECSApp Server Group', () => {
       .eq(0)
       .click();
 
-    cy.get('[data-testid="ContainerInputs.computeUnits"]')
+    cy.get('[data-testid="ContainerInput.computeUnits"]')
       .clear()
       .type(1024);
 
-    cy.get('[data-testid="ContainerInputs.reservedMemory"]')
+    cy.get('[data-testid="ContainerInput.reservedMemory"]')
       .clear()
       .type(1024);
 
