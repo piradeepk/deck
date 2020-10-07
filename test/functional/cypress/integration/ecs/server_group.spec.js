@@ -36,13 +36,13 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('span:contains("Continue")').click();
 
-    cy.get('div[ng-model="command.ecsClusterName"]').type('spinnaker-deployment-cluster');
+    cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
 
     cy.get('span:contains("spinnaker-deployment-cluster")').click();
 
-    cy.get('input[ng-model="command.stack"]').type('functional');
+    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('input[ng-model="command.freeFormDetails"]').type('testing');
+    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
     cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
 
@@ -120,13 +120,13 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('span:contains("Continue")').click();
 
-    cy.get('div[ng-model="command.ecsClusterName"]').type('spinnaker-deployment-cluster');
+    cy.get('[data-testId="ServerGroupWizard.clusterName"]').type('spinnaker-deployment-cluster');
 
     cy.get('span:contains("spinnaker-deployment-cluster")').click();
 
-    cy.get('input[ng-model="command.stack"]').type('functional');
+    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('input[ng-model="command.freeFormDetails"]').type('testing');
+    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
     cy.get('div[ng-model="$ctrl.command.networkMode"]').type('awsvpc');
 
@@ -144,19 +144,15 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('.Select-option:contains("TRIGGER")').click();
 
-    cy.get('container-react input[type=number]')
-      .eq(0)
-      .type(1024);
+    cy.get('[data-testid="ContainerInput.computeUnits"]').type(1024);
 
-    cy.get('container-react input[type=number]')
-      .eq(1)
-      .type(1024);
+    cy.get('[data-testid="ContainerInput.reservedMemory"]').type(1024);
 
     cy.get('div[ng-model="$ctrl.command.launchType"]').type('FARGATE');
 
     cy.get('.ui-select-highlight:contains("FARGATE")').click();
 
-    cy.get('div[ng-model="$ctrl.command.logDriver"]').type('awslogs');
+    cy.get('[data-testId="ServerGroupWizard.logDriver"]').type('awslogs');
 
     cy.get('span:contains("awslogs")').click();
 
@@ -181,13 +177,9 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('input[ng-model="command.stack"]')
-      .clear()
-      .type('functional');
+    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('input[ng-model="command.freeFormDetails"]')
-      .clear()
-      .type('testing');
+    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
     cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
@@ -209,13 +201,9 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('input[ng-model="command.stack"]')
-      .clear()
-      .type('functional');
+    cy.get('[data-testId="ServerGroupWizard.stack"]').type('functional');
 
-    cy.get('input[ng-model="command.freeFormDetails"]')
-      .clear()
-      .type('testing');
+    cy.get('[data-testId="ServerGroupWizard.detail"]').type('testing');
 
     cy.get('input[ng-model="command.useTaskDefinitionArtifact"]')
       .eq(0)

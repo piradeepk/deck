@@ -42,6 +42,7 @@
           ng-model="command.ecsClusterName"
           ng-if="command.backingData.filtered.ecsClusters.length"
           class="form-control input-sm"
+          data-testId="ServerGroupWizard.clusterName"
           required
           on-select="fieldChanged()"
         >
@@ -63,6 +64,7 @@
         <input
           type="text"
           class="form-control input-sm no-spel"
+          data-testId="ServerGroupWizard.stack"
           ng-pattern="basicSettingsCtrl.stackPattern"
           name="stack"
           ng-model="command.stack"
@@ -83,6 +85,7 @@
         <input
           type="text"
           class="form-control input-sm no-spel"
+          data-testId="ServerGroupWizard.detail"
           ng-pattern="basicSettingsCtrl.detailPattern"
           name="details"
           ng-model="command.freeFormDetails"

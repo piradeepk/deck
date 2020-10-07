@@ -227,7 +227,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
           </div>
           <div className="col-md-9">
             <TetheredSelect
-              data-testid="ContainerInputs.containerImage"
+              data-testid="ContainerInput.containerImage"
               placeholder="Select an image to use..."
               options={dockerImageOptions}
               value={this.state.imageDescription.imageId}
@@ -243,11 +243,11 @@ export class Container extends React.Component<IContainerProps, IContainerState>
             <b>Compute Units</b>
             <HelpField id="ecs.capacity.reserved.computeUnits" />
           </div>
-          <div className="col-md-9" style={{ width: '100px' }} data-testid="ContainerInputs.computeUnits">
+          <div className="col-md-9" style={{ width: '100px' }}>
             <input
-              data-testid="ContainerInput.computeUnits"
               type="number"
               className="form-control input-sm no-spel"
+              data-testid="ContainerInput.computeUnits"
               required={false}
               value={this.state.computeUnits}
               onChange={e => updateComputeUnits(e.target.valueAsNumber)}
