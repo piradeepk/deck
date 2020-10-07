@@ -188,7 +188,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
         <tr key={index}>
           <td>
             <TetheredSelect
-              data-test-id="ContainerInput.targetGroup"
+              data-testid="ContainerInput.targetGroup"
               placeholder="Select a target group to use..."
               options={targetGroupsAvailable}
               value={mapping.targetGroup.toString()}
@@ -198,7 +198,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
           </td>
           <td>
             <input
-              data-test-id="ContainerInput.targetGroupPort"
+              data-testid="ContainerInput.targetGroupPort"
               type="number"
               className="form-control input-sm no-spel"
               required={true}
@@ -227,7 +227,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
           </div>
           <div className="col-md-9">
             <TetheredSelect
-              data-test-id="ContainerInputs.containerImage"
+              data-testid="ContainerInputs.containerImage"
               placeholder="Select an image to use..."
               options={dockerImageOptions}
               value={this.state.imageDescription.imageId}
@@ -245,7 +245,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
           </div>
           <div className="col-md-9" style={{ width: '100px' }}>
             <input
-              data-test-id="ContainerInput.computeUnits"
+              data-testid="ContainerInput.computeUnits"
               type="number"
               className="form-control input-sm no-spel"
               required={false}
@@ -261,7 +261,7 @@ export class Container extends React.Component<IContainerProps, IContainerState>
           </div>
           <div className="col-md-9" style={{ width: '100px' }}>
             <input
-              data-test-id="ContainerInput.reservedMemory"
+              data-testid="ContainerInput.reservedMemory"
               type="number"
               className="form-control input-sm no-spel"
               required={false}

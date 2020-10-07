@@ -221,13 +221,11 @@ describe('amazon ecs: ECSApp Server Group', () => {
       .eq(0)
       .click();
 
-    cy.get('[data-test-id="ContainerInputs.computeUnits"]')
-      .eq(0)
+    cy.get('[data-testid="ContainerInputs.computeUnits"]')
       .clear()
       .type(1024);
 
-    cy.get('[data-test-id="ContainerInputs.reservedMemory"]')
-      .eq(1)
+    cy.get('[data-testid="ContainerInputs.reservedMemory"]')
       .clear()
       .type(1024);
 
