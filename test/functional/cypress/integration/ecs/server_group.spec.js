@@ -239,9 +239,9 @@ describe('amazon ecs: ECSApp Server Group', () => {
 
     cy.get('.glyphicon-edit').click({ force: true });
 
-    cy.get('[data-test-id="ContainerInputs.computeUnits"]').should('have.value', '1024');
+    cy.get('[data-testid="ContainerInputs.computeUnits"]').should('have.value', '1024');
 
-    cy.get('[data-test-id="ContainerInputs.reservedMemory"]').should('have.value', '1024');
+    cy.get('[data-testid="ContainerInputs.reservedMemory"]').should('have.value', '1024');
 
     cy.get('submit-button[label="command.viewState.submitButtonLabel"]').click();
 
